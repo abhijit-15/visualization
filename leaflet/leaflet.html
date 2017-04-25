@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	
+    <title>Leaflet</title>
+	</head>
+	<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.3/leaflet.js" charset = "utf-8"></script>
+	<script>
+	console.log("started");
+	var mapboxAccessToken = 'pk.eyJ1IjoiYWJoaWppdDE1MTIiLCJhIjoiY2oxNHhlMHQ0MDBqdjMyb2R2ZTB5NTl3dSJ9.DbH3T3bLA81bPwgYc7jxTw';
+	var map = L.map('map').setView([37.8, -96], 4);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
+    id: 'mapbox.light'}).addTo(map);
+	console.log("success");	
+	</script> 
+  </body>
+</html>
+
