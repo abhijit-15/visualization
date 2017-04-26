@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Area - Rectangle Visualization</title>
+<style>
+#map_canvas {width:60%;height: 800px;}
+</style>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+
+<script>
+function initialize() {
+        var homeLatlng = new google.maps.LatLng(12.9716,77.5946);
+        var myOptions = {
+            zoom: 12,
+            center: homeLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		
+	  var myrect = new google.maps.Rectangle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map,
+	  editable:true,
+	  draggable:true, 
+	  bounds:{north:12.970891,east:77.637118,south:12.9342536,west:77.605881}
+	  });
+		
+		
+		google.maps.event.addListener(myrect,"bounds_changed",function () {
+		document.getElementById("info1").innerHTML = [myrect.bounds.getNorthEast().lat(),myrect.bounds.getNorthEast().lng()];
+		});	
+		
+		google.maps.event.addListener(myrect,"bounds_changed",function () {
+		document.getElementById("info2").innerHTML = [myrect.bounds.getSouthWest().lat(),myrect.bounds.getSouthWest().lng()];
+		});
+		
+		google.maps.event.addListener(myrect,"bounds_changed",function()  {
+		document.getElementById("centerRect").innerHTML = [(myrect.bounds.getNorthEast().lat()+myrect.bounds.getSouthWest().lat())/2,
+						 (myrect.bounds.getSouthWest().lng()+myrect.bounds.getNorthEast().lng())/2]
+		});
+		
+		document.getElementById("centerRect").innerHTML;
+		;
+	}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+<body>
+  <div id="map_canvas"></div>
+  <h5>North East is : </h5>
+  <div id="info1"></div>
+  <h5>South West is : </h5>
+  <div id="info2"></div>
+  <h5>Center is :</h5>
+  <div id="centerRect"></div>
+</body>
+</html>
